@@ -1,0 +1,24 @@
+{
+  "name": "viaplay-backend",
+  "version": "1.0.0",
+  "description": "backend for stockholm restaurant data",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "author": "Chu-Cheng Fu",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.16"
+  },
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "nodemon": "^2.0.7"
+  }
+}
