@@ -4,6 +4,24 @@
 
 Your task is to create a REST API that can read and write into the provided db while providing endpoints to clients from which they will be able to perform basic CRUD (Create, Read, Update, Delete) operations on the database. Instructions on how to set up the mongoDB container provided and an example of the data included are briefly described in the next section. Feel free to modify the schema of the database if you think it is necessary.
 
+
+### Project Structure
+
+```
+├── index.js
+├── app.js
+├── controllers
+│   └── restaurants.js
+├── models
+│   └── restaurant.js
+├── package-lock.json
+├── package.json
+├── utils
+│   ├── config.js
+│   ├── logger.js
+│   └── middleware.js
+```
+
 ### Basic functionalities
 
 - [x] An endpoint that lets the client get a list of all restaurants
