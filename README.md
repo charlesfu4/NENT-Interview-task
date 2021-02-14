@@ -6,12 +6,12 @@ Your task is to create a REST API that can read and write into the provided db w
 
 ### Basic functionalities
 
-- [ ] An endpoint that lets the client get a list of all restaurants
-- [ ] An endpoint that lets the client get more info on a single restaurant
-- [ ] An endpoint that accepts a POST request to add new restaurants to the DB
-- [ ] Function that deletes restaurants from the DB through the API
-- [ ] Function that fetch a sorted list of restaurant based on relevant attribute
-- [ ] Function that fetch a filtered list of restaurant based on relevant attribute
+- [x] An endpoint that lets the client get a list of all restaurants
+- [x] An endpoint that lets the client get more info on a single restaurant
+- [x] An endpoint that accepts a POST request to add new restaurants to the DB
+- [x] Function that deletes restaurants from the DB through the API
+- [x] Function that fetch a sorted list of restaurant based on relevant attribute
+- [x] Function that fetch a filtered list of restaurant based on relevant attribute
 
 ### Check list for documentation
 
