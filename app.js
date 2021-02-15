@@ -1,7 +1,7 @@
 const config = require('./utils/config')
 const express = require('express')
 const app = express()
-// const cors = require('cors')
+const cors = require('cors')
 const restaurantsRouter = require('./controllers/restaurants')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
@@ -17,8 +17,7 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology
     logger.error('error connecting to MongoDB:', error.message)
   })
 
-// app.use(cors())
-// app.use(express.static('build'))
+app.use(cors())
 app.use(express.json())
 app.use(middleware.requestLogger)
 

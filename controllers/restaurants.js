@@ -1,18 +1,18 @@
 const restaurantsRouter = require('express').Router()
 const Restaurant = require('../models/restaurant')
-const mongoose = require('mongoose')
 
-// End points displays all the data
-// Queries include sort and filter
+// End points that displays all the data
+// Also provides queries including: sorting and filtering
 restaurantsRouter.get('/', async (request, response) => {
   const { sort, ...filters } = request.query
   if(!request.query.sort){
     request.query.sort=''
   }
+  // Extract url filter query, format see documentation
   let formatFilters = JSON.stringify(filters)
     .replace(/\b(gt|gte|lt|lte|eq|ne)\b/g, match => `$${match}`)
-  console.log(JSON.parse(formatFilters))
   console.log(sort)
+
   try{
     const restaruants = await Restaurant
       .find(JSON.parse(formatFilters))
@@ -30,10 +30,11 @@ restaurantsRouter.get('/', async (request, response) => {
   }
 })
 
-// End points let users to get complete information about the restaurant
+// End point that let users to get complete information about the restaurant
 restaurantsRouter.get('/:id', async (request, response) => {
   try{
-    const foundRestaurant = await Restaurant.findById(request.params.id)
+    const foundRestaurant = await Restaurant
+      .findOne({ id: Number(request.params.id) })
     if(foundRestaurant){
       response.json({ status: 'success', foundRestaurant })
     }
@@ -45,9 +46,12 @@ restaurantsRouter.get('/:id', async (request, response) => {
   }
 })
 
-// End points let users get get complete information about the restaurant
+// End point that lets users get complete information about the restaurant
 restaurantsRouter.post('/', async (request, response) => {
   const body = request.body
+  // Due to the limitation, we have to stick to incremental id schema
+  // This lower the efficiency of creating new restaurant
+  const sortedList = await Restaurant.findOne().sort('-id')
 
   const restaurant = new Restaurant({
     location: body.location,
@@ -61,7 +65,7 @@ restaurantsRouter.post('/', async (request, response) => {
     google_maps_url:  body.google_maps_url,
     website: body.website,
     photo: body.photo,
-    id: body.id
+    id: sortedList.id + 1
   })
   try{
     const savedRestaurant = await restaurant.save()
@@ -71,13 +75,43 @@ restaurantsRouter.post('/', async (request, response) => {
   }
 })
 
-// Delete restaruant from the DB
+// End point that deletes restaruant from the DB
 restaurantsRouter.delete('/:id', async (request, response) => {
   try{
     await Restaurant.findOneAndDelete({ id: Number(request.params.id) })
     response.status(204).end()
   } catch(error){
     response.status(403).json({ error : error })
+  }
+})
+
+// End point that updates restaurant information
+restaurantsRouter.put('/:id', async (request, response) => {
+  const body = request.body
+
+  const newRestaurant = {
+    location: body.location,
+    opening_hours: body.opening_hours,
+    address: body.address,
+    phone_number: body.phone_number,
+    icon: body.icon,
+    name: body.name,
+    rating: body.rating,
+    price_level: body.price_level,
+    google_maps_url:  body.google_maps_url,
+    website: body.website,
+    photo: body.photo,
+    id: Number(request.params.id)
+  }
+
+  try{
+    const updatedRestaurant = await Restaurant
+      .findOneAndUpdate({ id: Number(request.params.id) },
+        newRestaurant,
+        { new: true, runValidators: true })
+    response.json(updatedRestaurant)
+  } catch(error){
+    response.status(500).json({ error: error })
   }
 })
 
