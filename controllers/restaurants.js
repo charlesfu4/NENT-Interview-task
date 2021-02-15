@@ -1,5 +1,6 @@
 const restaurantsRouter = require('express').Router()
 const Restaurant = require('../models/restaurant')
+const mongoose = require('mongoose')
 
 // End points displays all the data
 // Queries include sort and filter
@@ -52,13 +53,15 @@ restaurantsRouter.post('/', async (request, response) => {
     location: body.location,
     opening_hours: body.opening_hours,
     address: body.address,
-    phone_number: body.phobe_number,
+    phone_number: body.phone_number,
     icon: body.icon,
     name: body.name,
     rating: body.rating,
+    price_level: body.price_level,
     google_maps_url:  body.google_maps_url,
     website: body.website,
     photo: body.photo,
+    id: body.id
   })
   try{
     const savedRestaurant = await restaurant.save()
@@ -71,7 +74,7 @@ restaurantsRouter.post('/', async (request, response) => {
 // Delete restaruant from the DB
 restaurantsRouter.delete('/:id', async (request, response) => {
   try{
-    await Restaurant.findByIdAndRemove(request.params.id)
+    await Restaurant.findOneAndDelete({ id: Number(request.params.id) })
     response.status(204).end()
   } catch(error){
     response.status(403).json({ error : error })

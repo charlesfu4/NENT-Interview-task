@@ -14,26 +14,30 @@ const restaurantSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  phone_number:{
+  phone_number: {
     type: String,
     required: true
   },
   icon: String,
   name: {
     type: String,
-    required: true
+    required: true,
   },
   price_level: Number,
   rating: Number,
   google_maps_url: String,
   website: String,
   photo: String,
+  id: {
+    type: Number,
+    required: true,
+    unique: true
+  }
 })
 
 // To delete __v field and replace incremental id with __id
 restaurantSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
   }
