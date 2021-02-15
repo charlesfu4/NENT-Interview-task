@@ -5,22 +5,19 @@ const Restaurant = require('../models/restaurant')
 // Also provides queries including: sorting and filtering
 restaurantsRouter.get('/', async (request, response) => {
   const { sort, ...filters } = request.query
-  if(!request.query.sort){
+  if(!sort){
     request.query.sort=''
   }
   // Extract url filter query, format see documentation
   let formatFilters = JSON.stringify(filters)
     .replace(/\b(gt|gte|lt|lte|eq|ne)\b/g, match => `$${match}`)
-  console.log(sort)
 
   try{
     const restaruants = await Restaurant
       .find(JSON.parse(formatFilters))
       .sort(request.query.sort)
     if(restaruants){
-      restaruants.length === 0
-        ? response.json({ status: 'empty' })
-        : response.json({ status: 'success', restaruants })
+      response.json(restaruants)
     }
     else{
       response.status(404).end()
@@ -36,7 +33,7 @@ restaurantsRouter.get('/:id', async (request, response) => {
     const foundRestaurant = await Restaurant
       .findOne({ id: Number(request.params.id) })
     if(foundRestaurant){
-      response.json({ status: 'success', foundRestaurant })
+      response.json(foundRestaurant)
     }
     else{
       response.status(404).end()
@@ -46,7 +43,7 @@ restaurantsRouter.get('/:id', async (request, response) => {
   }
 })
 
-// End point that lets users get complete information about the restaurant
+// End point that lets users create a new restaurant
 restaurantsRouter.post('/', async (request, response) => {
   const body = request.body
   // Due to the limitation, we have to stick to incremental id schema
@@ -69,9 +66,9 @@ restaurantsRouter.post('/', async (request, response) => {
   })
   try{
     const savedRestaurant = await restaurant.save()
-    response.json({ status: 'success', savedRestaurant })
+    response.json(savedRestaurant)
   } catch(error){
-    response.status(500).json({ error : error })
+    response.status(400).json({ error : error })
   }
 })
 

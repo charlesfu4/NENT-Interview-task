@@ -21,10 +21,12 @@ Your task is to create a REST API that can read and write into the provided db w
 │   ├── logger.js
 │   └── middleware.js
 ├── test
-│   └── restaurant_api.test.js 
+│   ├── restaurant_api.test.js 
+│   └── test_helper.js
 ├── database
 │   ├── mongodb
 │   └── mongodb_test
+└── .env
 ```
 
 ### Basic functionalities
