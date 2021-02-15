@@ -31,9 +31,14 @@ Your task is to create a REST API that can read and write into the provided db w
 - [x] Function that fetch a sorted list of restaurant based on relevant attribute
 - [x] Function that fetch a filtered list of restaurant based on relevant attribute
 
+### Extra functionalities
+
+- [x] An endpoint that lets the client update restaurant info based on id
+- [ ] Backend test
+
 ### Check list
 
-- [ ] Deal with incremental id problem
+- [x] Deal with incremental id problem
 
 ### Documentation
 
