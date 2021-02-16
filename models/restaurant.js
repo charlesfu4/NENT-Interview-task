@@ -34,7 +34,7 @@ const restaurantSchema = new mongoose.Schema({
   }
 })
 
-// To delete __v field and replace incremental id with __id
+// To delete __v field and _id
 restaurantSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     delete returnedObject._id
