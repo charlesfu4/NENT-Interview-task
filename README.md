@@ -82,7 +82,17 @@ To run integrated tests of the backend APIs. Please follow the steps after launc
 
 - Sorting: `/api/restaurants?sort={attribute}`
 
-- Filtering: `/api/restaurants?{attribute}[st|ste|eq|gt|gte]={value}`
+    |        |
+    |        |
+    |--------|
+    |        |
+    |        |
+    |        |
+    |--------|
+    |        |
+    |        |
+
+- Filtering: `/api/restaurants?{attribute}[st|ste|eq|ne|gt|gte]={value}`
 
 
 ### Design decisions
@@ -133,7 +143,7 @@ The architecture itself is also obvious. According to the structural diagram abo
 
 - Sorting: The sorting functionalities now is only limited to rating, pricing, and location fields. Since these three are the numeric fields. The funcitonalities can be expanded to field such as opening hours if the Schema is defined as Date. This might be useful when the endpoint wants to provide insight about how long the restaurant actually opens in a week.
 
-- Filtering: The filtering function also works for numeric filed comparison. The existing bug is filtering queries on location can caused error. The reason is that it has two fields `lat`, and `lng`. And the current url query format does not support child field filtering.
+- Filtering: The filtering function works for full-field comparison, which means it filters the whole body of the field by not partial. The existing bug is filtering queries on location can caused error. The reason is that it has two fields `lat`, and `lng`. And the current url query format does not support child field filtering.
 
 - Incremental id: In the coding task instruction. It suggested us not to use the `_id`(the mongoDB unique id). This is questionable. Since the remaining id field follows incremental manner, this make the create function an overhead of the performance of the application. So basically, we will have to sort the whole collection according to their incremental id before we can assign a new unique id to the newly created object. The extra cost of sorting before creating is not ideal in my mind and hopefully it can be easily solved by going back to using `_id` field.
 
