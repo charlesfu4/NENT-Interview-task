@@ -25,9 +25,42 @@ Your task is to create a REST API that can read and write into the provided db w
 │   └── test_helper.js
 ├── database
 │   ├── mongodb
+|   |   ├── docker-composer.yml
+|   |   └── provision
 │   └── mongodb_test
+|       ├── docker-composer.yml
+|       └── provision
 └── .env
 ```
+
+
+### Instructions
+
+#### Build database image
+
+The database in the form of docker containers provides two clone versions of the original image. Always make sure you are running the correct docker image when either production or testing mode.
+
+- Depending on which mode you are in, navigate to different folder `mongodb/mogodbtest`. The first is for produciton mode and the second is for testing mode.
+- Simply run `docker-compose up --build` and the database instance will listen on port 27017.
+- **Warning**: Always shut down the current one before launching the other one to avoid port conflicts.
+
+#### Installation
+
+Run `npm install` to install node packages that will be used in this application.
+
+#### Production version
+
+To set up the production version of the backend APIs. Please follow the steps after launching the db container.
+
+- Run `npm start` to run the application, the endpoints can then be accessed through <a href="http://localhost:3001">http://localhost:3001</a>.
+- <a href="https://www.postman.com/downloads/">POSTMAN</a> is recommended to try out the API endpoints.
+
+#### Testing Mode
+
+To run integrated tests of the backend APIs. Please follow the steps after launching the testing db container.
+
+- Run `npm test -- /test/restaurant_api.test.js` to run the application.
+- Tests will be executed in a log-based manner with success/error messages.
 
 ### Basic functionalities
 
@@ -41,15 +74,11 @@ Your task is to create a REST API that can read and write into the provided db w
 ### Extra functionalities
 
 - [x] An endpoint that lets the client update restaurant info based on id
-- [ ] Backend test
-
-### Check list
-
-- [x] Deal with incremental id problem
+- [x] Backend test
 
 ### Documentation
 
-- [ ] Instructions on how to run your application. (including toolset versions)
+- [x] Instructions on how to run your application. (including toolset versions)
 - [ ] List of features completed/attempted
 - [ ] A short explanation of your design decisions if necessary
 - [ ] Possible improvements and bugs if any
