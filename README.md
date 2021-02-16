@@ -86,13 +86,13 @@ To run integrated tests of the backend APIs. Please follow the steps after launc
 #### Detail url queries for sorting and filtering
 
 - Sorting: **GET** `http://localhost:3001/api/restaurants?sort={attribute}`
-  - sorting can be stacked by using `+`. Ex: `rating+price_level` 
-  - default sorting descendently, put `-` to activate ascendently sort. Ex: `-rating`
-  - above two can be stacked together. Ex: `-rating+-price_level` (sorted by rating and price level ascendently)
+  - sorting can be stacked by using `+`. **Ex:** `http://localhost:3001/api/restaurants?sort=rating+price_level`
+  - default sorting descendently, put `-` to activate ascendently sort. **Ex:** `-rating`
+  - above two can be stacked together. **Ex:** `-rating+-price_level` (sorted by rating and price level ascendently)
 
 - Filtering: **GET** `http://localhost:3001/api/restaurants?{attribute}[st|ste|eq|ne|gt|gte]={value}`
   - lt: lower than, lte: lower than equal, eq: equal, ne: not equal, gt: greater than, gte: greater than equal
-  - stacking, need character `&`. Ex: `price_level[lt]=2&rating[gt]=4` (filter with price level lower than 2 and rating greater than 4)
+  - stacking, need character `&`. **Ex:** `http://localhost:3001/api/restaurants?price_level[lt]=2&rating[gt]=4` (filter with price level lower than 2 and rating greater than 4)
 
 
 ### Design decisions
