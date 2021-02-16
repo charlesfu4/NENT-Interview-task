@@ -38,7 +38,7 @@ Your task is to create a REST API that can read and write into the provided db w
 
 #### Build database image
 
-The database in the form of docker containers provides two clone versions of the original image. Always make sure you are running the correct docker image when either production or testing mode.
+The database in the form of docker containers provides two cloned versions of the original image. Always make sure you are running the correct docker image when either production or testing mode.
 
 - Depending on which mode you are in, navigate to different folder `mongodb/mogodbtest`. The first is for produciton mode and the second is for testing mode.
 - Simply run `docker-compose up --build` and the database instance will listen on port 27017.
@@ -59,7 +59,7 @@ To set up the production version of the backend APIs. Please follow the steps af
 
 To run integrated tests of the backend APIs. Please follow the steps after launching the testing db container.
 
-- Run `npm test -- /test/restaurant_api.test.js` to run the application.
+- Run `npm test -- /test/restaurant_api.test.js` to test the application.
 - Tests will be executed in a log-based manner with success/error messages.
 
 ### Features Implemented
@@ -81,16 +81,6 @@ To run integrated tests of the backend APIs. Please follow the steps after launc
 #### Url queries for sorting and filtering
 
 - Sorting: `/api/restaurants?sort={attribute}`
-
-    |        |
-    |        |
-    |--------|
-    |        |
-    |        |
-    |        |
-    |--------|
-    |        |
-    |        |
 
 - Filtering: `/api/restaurants?{attribute}[st|ste|eq|ne|gt|gte]={value}`
 
@@ -136,7 +126,7 @@ const restaurantSchema = new mongoose.Schema({
 })
 ```
 
-The architecture itself is also obvious. According to the structural diagram above and from the funtional point of view. Each components have their own purpose. This is a structure that keeps functionalities overlapping to the lowest and makes code clean and organized.
+The architecture itself is also obvious. According to the structural diagram above and from the funtional point of view. Each component has its own purpose. This is a structure that keeps functionalities overlapping to the lowest and makes code clean and organized.
 
 
 ### Possible improvements, bugs, and thoughts 
