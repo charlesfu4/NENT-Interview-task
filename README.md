@@ -62,7 +62,6 @@ To run integrated tests of the backend APIs. Please follow the steps after launc
 - Run `npm test -- /test/restaurant_api.test.js` to run the application.
 - Tests will be executed in a log-based manner with success/error messages.
 
-
 ### Features Implemented
 
 #### Basic functionalities
@@ -79,12 +78,17 @@ To run integrated tests of the backend APIs. Please follow the steps after launc
 - [x] An endpoint that lets the client update restaurant info based on id
 - [x] Backend test
 
-### Design decisions:
+#### Url queries for sorting and filtering
 
-The backend application is relatively simple since there is only one model, which is the restaurant itself. Therefore, the Schema that I defined for the endpoint APIs follows the original Schema. Notice here, I picked the _id_ as an unique identifier since I stick to incremental id that provided by the original Schema. `_id` and `__v` are both discarded according to the instruction. 
-Here, I also put _name_, _opening_hours_, and _address_ as required field which is the three most important attributes for a new created restaurant.
+- Sorting: `/api/restaurants?sort={attribute}`
 
-The architecture itself is also obvious. According to the structurei diagram above and from the funtional point of view. Each components have their own purpose. This is a structure that keep functionalities overlapping to the lowest abd make code clean and organized.
+- Filtering: `/api/restaurants?{attribute}[st|ste|eq|gt|gte]={value}`
+
+
+### Design decisions
+
+The backend application is relatively simple since there is only one model, which is the restaurant itself. Therefore, the Schema that I defined for the endpoint APIs follows the original Schema. Notice here, I picked the `id` as an unique identifier since I stick to incremental id that provided by the original Schema. `_id` and `__v` are both discarded according to the instruction. 
+Here, I also put `name`, `opening_hours`, and `address` as required field which is the three most important attributes for a new created restaurant.
 
 ```javascript
 // Create Schema for restaurant data
@@ -122,15 +126,21 @@ const restaurantSchema = new mongoose.Schema({
 })
 ```
 
-### Possible improvements and bugs
+The architecture itself is also obvious. According to the structural diagram above and from the funtional point of view. Each components have their own purpose. This is a structure that keeps functionalities overlapping to the lowest and makes code clean and organized.
 
-### Other ideas and thoughts 
+
+### Possible improvements, bugs, and thoughts 
+
+- Sorting: The sorting functionalities now is only limited to rating, pricing, and location fields. Since these three are the numeric fields. The funcitonalities can be expanded to field such as opening hours if the Schema is defined as Date. This might be useful when the endpoint wants to provide insight about how long the restaurant actually opens in a week.
+
+- Filtering: The filtering function also works for numeric filed comparison. The existing bug is filtering queries on location can caused error. The reason is that it has two fields `lat`, and `lng`. And the current url query format does not support child field filtering.
+
+- Incremental id: In the coding task instruction. It suggested us not to use the `_id`(the mongoDB unique id). This is questionable. Since the remaining id field follows incremental manner, this make the create function an overhead of the performance of the application. So basically, we will have to sort the whole collection according to their incremental id before we can assign a new unique id to the newly created object. The extra cost of sorting before creating is not ideal in my mind and hopefully it can be easily solved by going back to using `_id` field.
 
 ### Documentation
 
 - [x] Instructions on how to run your application. (including toolset versions)
 - [x] List of features completed/attempted
 - [x] A short explanation of your design decisions if necessary
-- [ ] Possible improvements and bugs if any
-- [ ] Other ideas and thoughts on the application you have written
+- [x] Possible improvements and bugs if any
 
