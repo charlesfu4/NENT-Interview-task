@@ -78,11 +78,16 @@ To run integrated tests of the backend APIs. Please follow the steps after launc
 - [x] An endpoint that lets the client update restaurant info based on id
 - [x] Backend test
 
-#### Url queries for sorting and filtering
+#### Detial for url queries for sorting and filtering
 
-- Sorting: `/api/restaurants?sort={attribute}`
+- Sorting: get `http://localhost:3001/api/restaurants?sort={attribute}`
+  - sorting can be stacked by using `+`. Ex: `rating+price_level` 
+  - default sorting descendently, put `-` to activate ascendently sort. Ex: `-rating`
+  - above two can be stacked together. Ex: `-rating+-price_level` (sorted by rating and price level ascendently)
 
-- Filtering: `/api/restaurants?{attribute}[st|ste|eq|ne|gt|gte]={value}`
+- Filtering: get `http://localhost:3001/api/restaurants?{attribute}[st|ste|eq|ne|gt|gte]={value}`
+  - st: smaller than, ste: smaller than equal, eq: equal, ne: not equal, gt: greater than, gte: greater than equal
+  - stacking, need character `&`. Ex: `price_level[lt]=2&rating[gt]=4` (filter with price level lower than 2 and rating greater than 4)
 
 
 ### Design decisions
@@ -142,5 +147,5 @@ The architecture itself is also obvious. According to the structural diagram abo
 - [x] Instructions on how to run your application. (including toolset versions)
 - [x] List of features completed/attempted
 - [x] A short explanation of your design decisions if necessary
-- [x] Possible improvements and bugs if any
+- [x] Possible improvements and bugs if any, idea and thoughts
 
