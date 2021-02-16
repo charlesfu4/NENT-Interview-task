@@ -141,7 +141,7 @@ The architecture itself is also obvious. According to the structural diagram abo
 
 ### Possible improvements, bugs, and thoughts 
 
-- Sorting: The sorting functionalities now is only limited to rating, pricing, and location fields. Since these three are the numeric fields. The funcitonalities can be expanded to field such as opening hours if the Schema is defined as Date. This might be useful when the endpoint wants to provide insight about how long the restaurant actually opens in a week.
+- Sorting: The sorting functionalities now is only limited to rating, pricing, and location fields. Since these three are the numeric fields. Of course, the other String attributes can be sorted, but it doesn't really make sense in sorting address or web links in most use cases. Noted that, the funcitonalities can be expanded to field such as opening hours if the Schema is defined as Date. This might be useful when the endpoint wants to provide insight about how long the restaurant actually opens in a week.
 
 - Filtering: The filtering function works for full-field comparison, which means it filters the whole body of the field by not partial. The existing bug is filtering queries on location can caused error. The reason is that it has two fields `lat`, and `lng`. And the current url query format does not support child field filtering.
 
