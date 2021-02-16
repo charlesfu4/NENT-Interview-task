@@ -52,8 +52,8 @@ Run `npm install` to install node packages that will be used in this application
 
 To set up the production version of the backend APIs. Please follow the steps after launching the db container.
 
-- Run `npm start` to run the application, the endpoints can then be accessed through <a href="http://localhost:3001">http://localhost:3001</a>.
-- <a href="https://www.postman.com/downloads/">POSTMAN</a> is recommended to try out the API endpoints.
+- Run `npm start` to run the application, the endpoints can then be accessed through [http://localhost:3001/api/restaurants](http://localhost:3001/api/restaurants).
+- [POSTMAN](https://www.postman.com/downloads/) is recommended to try out the API endpoints.
 
 #### Testing Mode
 
@@ -62,7 +62,10 @@ To run integrated tests of the backend APIs. Please follow the steps after launc
 - Run `npm test -- /test/restaurant_api.test.js` to run the application.
 - Tests will be executed in a log-based manner with success/error messages.
 
-### Basic functionalities
+
+### Features Implemented
+
+#### Basic functionalities
 
 - [x] An endpoint that lets the client get a list of all restaurants
 - [x] An endpoint that lets the client get more info on a single restaurant
@@ -71,16 +74,63 @@ To run integrated tests of the backend APIs. Please follow the steps after launc
 - [x] Function that fetch a sorted list of restaurant based on relevant attribute
 - [x] Function that fetch a filtered list of restaurant based on relevant attribute
 
-### Extra functionalities
+#### Extra functionalities
 
 - [x] An endpoint that lets the client update restaurant info based on id
 - [x] Backend test
 
+### Design decisions:
+
+The backend application is relatively simple since there is only one model, which is the restaurant itself. Therefore, the Schema that I defined for the endpoint APIs follows the original Schema. Notice here, I picked the _id_ as an unique identifier since I stick to incremental id that provided by the original Schema. `_id` and `__v` are both discarded according to the instruction. 
+Here, I also put _name_, _opening_hours_, and _address_ as required field which is the three most important attributes for a new created restaurant.
+
+The architecture itself is also obvious. According to the structurei diagram above and from the funtional point of view. Each components have their own purpose. This is a structure that keep functionalities overlapping to the lowest abd make code clean and organized.
+
+```javascript
+// Create Schema for restaurant data
+const restaurantSchema = new mongoose.Schema({
+  location:{
+    lat: Number,
+    lng: Number,
+  },
+  opening_hours: {
+    type: [String],
+    required: true
+  },
+  address:{
+    type: String,
+    required: true
+  },
+  phone_number: {
+    type: String,
+  },
+  icon: String,
+  name: {
+    type: String,
+    required: true,
+  },
+  price_level: Number,
+  rating: Number,
+  google_maps_url: String,
+  website: String,
+  photo: String,
+  id: {
+    type: Number,
+    required: true,
+    unique: true
+  }
+})
+```
+
+### Possible improvements and bugs
+
+### Other ideas and thoughts 
+
 ### Documentation
 
 - [x] Instructions on how to run your application. (including toolset versions)
-- [ ] List of features completed/attempted
-- [ ] A short explanation of your design decisions if necessary
+- [x] List of features completed/attempted
+- [x] A short explanation of your design decisions if necessary
 - [ ] Possible improvements and bugs if any
 - [ ] Other ideas and thoughts on the application you have written
 
