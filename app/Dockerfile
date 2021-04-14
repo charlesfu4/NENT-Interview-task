@@ -6,4 +6,5 @@ COPY . .
 
 RUN npm install
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]
+#CMD ["npm", "test", "--", "/test/restaurant_api.test.js"]

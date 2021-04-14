@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.5"
 services:
   mongo_provision_dev:
     build: ./database/provision/dev
@@ -10,6 +10,17 @@ services:
     ports:
       - "27017:27017"
       - "28017:28017"
+
+  mongo_provision_test:
+    build: ./database/provision/testing
+    links:
+     - mongodb_test
+
+  mongodb_test:
+    image: mongo
+    ports:
+      - "27018:27017"
+      - "28018:28017"
 
   node_backend:
     build: ./app

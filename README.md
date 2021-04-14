@@ -9,9 +9,8 @@ Your task is to create a REST API that can read and write into the provided db w
 
 ```
 ├─── database
-│   │
 │   ├── dev
-│   └── test
+│   └── testing
 └─── app
     ├── index.js
     ├── app.js
@@ -37,31 +36,30 @@ Your task is to create a REST API that can read and write into the provided db w
 [![Generic badge](https://img.shields.io/badge/npm-7.5.3-<COLOR>.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/docker-20.10.2-<COLOR>.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/dockercompose-1.27.4-<COLOR>.svg)](https://shields.io/)
-#### Build database image
+### Dockerized application
 
-The database in the form of docker containers provides two cloned versions of the original image. Always make sure you are running the correct docker image when either production or testing mode.
+#### Production mode
 
-- Depending on which mode you are in, navigate to different folder `mongodb/mogodbtest`. The first is for produciton mode and the second is for testing mode.
-- Simply run `docker-compose up --build` and the database instance will listen on port 27017.
-- **Warning**: Always shut down the current one before launching the other one to avoid port conflicts.
+```shell
+docker-compose up --build
+# then access localhost:3001/api/restaurants to comsume the APIs
+# after finishing
+docker-compose down
+```
 
-#### Installation
+#### Testing mode
 
-Run `npm install` to install node packages that will be used in this application.
-
-#### Production version
-
-To set up the production version of the backend APIs. Please follow the steps after launching the db container.
-
-- Run `npm start` to run the application, the endpoints can then be accessed through [http://localhost:3001/api/restaurants](http://localhost:3001/api/restaurants).
-- [POSTMAN](https://www.postman.com/downloads/) is recommended to try out the API endpoints.
-
-#### Testing Mode
-
-To run integrated tests of the backend APIs. Please follow the steps after launching the testing db container.
-
-- Run `npm test -- /test/restaurant_api.test.js` to test the application.
-- Tests will be executed in a log-based manner with success/error messages.
+```shell
+cd app/
+vim Dockerfile
+# Comment out the CMD ["npm", "start"] and activate the CMD ["npm", "test", "--", "/test/restaurant_api.test.js"] 
+# save and quit
+cd ..
+docker-compose up --build
+# Then the integrated tests will be run in the logs
+# after finishing
+docker-compose down
+```
 
 ### Features Implemented
 
@@ -78,6 +76,7 @@ To run integrated tests of the backend APIs. Please follow the steps after launc
 
 - [x] An endpoint that lets the client update restaurant info based on id
 - [x] Backend test
+- [x] Dockerized
 
 #### Detail url queries for sorting and filtering
 
