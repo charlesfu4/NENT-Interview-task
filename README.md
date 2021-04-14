@@ -8,34 +8,28 @@ Your task is to create a REST API that can read and write into the provided db w
 ### Project Structure
 
 ```
-├── index.js
-├── app.js
-├── controllers
-│   └── restaurants.js
-├── models
-│   └── restaurant.js
-├── package-lock.json
-├── package.json
-├── utils
-│   ├── config.js
-│   ├── logger.js
-│   └── middleware.js
-├── test
-│   ├── restaurant_api.test.js 
-│   └── test_helper.js
-├── database
-│   ├── mongodb
-|   |   ├── docker-composer.yml
-|   |   └── provision
-│   └── mongodb_test
-|       ├── docker-composer.yml
-|       └── provision
-└── .env
-```
 
-
-### Instructions
-
+├─── database
+│   │
+│   ├── dev
+│   └── test
+└─── app
+    ├── index.js
+    ├── app.js
+    ├── controllers
+    │   └── restaurants.js
+    ├── models
+    │   └── restaurant.js
+    ├── package-lock.json
+    ├── package.json
+    ├── utils
+    │   ├── config.js
+    │   ├── logger.js
+    │   └── middleware.js
+    └── test
+        ├── restaurant_api.test.js 
+        └── test_helper.js
+``` ### Instructions 
 #### Tools version
 
 [![Generic badge](https://img.shields.io/badge/npm-7.5.3-<COLOR>.svg)](https://shields.io/)
