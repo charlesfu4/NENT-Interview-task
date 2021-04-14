@@ -8,7 +8,6 @@ Your task is to create a REST API that can read and write into the provided db w
 ### Project Structure
 
 ```
-
 ├─── database
 │   │
 │   ├── dev
@@ -29,7 +28,10 @@ Your task is to create a REST API that can read and write into the provided db w
     └── test
         ├── restaurant_api.test.js 
         └── test_helper.js
-``` ### Instructions 
+```
+
+### Instructions 
+
 #### Tools version
 
 [![Generic badge](https://img.shields.io/badge/npm-7.5.3-<COLOR>.svg)](https://shields.io/)
